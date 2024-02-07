@@ -11,8 +11,10 @@ Guided by: https://www.youtube.com/watch?v=eVKm12T0BPg
 
 **Final result** : Serve your m3u8  
 https://github.com/Ruslan-Aliyev/video_streaming/blob/master/m3u8.html  
+Guided by: https://gist.github.com/lukebussey/4d27678c72580aeb660c19a6fb73e9ee#file-ffmpeg-mp4-to-hls-conversion-md  
+
 Download and install FFmpeg: https://ffmpeg.org/download.html  
-Convert video into m3u8 using FFmpeg: `gist:[lukebussey/]4d27678c72580aeb660c19a6fb73e9ee#file-ffmpeg-mp4-to-hls-conversion-md`  
+Convert video into m3u8 using FFmpeg: `ffmpeg -i filename.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls filename.m3u8`  
 
 ### Serve video as BLOB  
 
