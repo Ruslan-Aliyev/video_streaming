@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+
+    <body>
+        <video autoplay="true"muted="muted"></video>
+
+        <script type="text/javascript">
+            var video = document.getElementsByTagName('video')[0];
+            /*
+            var URL = this.window.URL || this.window.webkitURL;
+            var file = new Blob(
+                // ["http://localhost/example.mp4"],
+                ["file:///C:/xampp/htdocs/example.mp4"],
+                {"type" : "video\/mp4"});
+            var value = URL.createObjectURL(file);
+            video.src = value;
+            video.load();
+            var playPromise = video.play();
+
+            if (playPromise !== undefined) 
+            {
+                playPromise.then(function() {
+                    // Automatic playback started!
+                }).catch(function(error) {
+                    // Automatic playback failed.
+                    // Show a UI element to let the user manually start playback.
+                    console.error(error);
+                });
+            }
+            */
+            // https://support.google.com/chrome/answer/95647?hl=EN
+            // https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use/50742427#50742427
+            // https://stackoverflow.com/questions/37674223/domexception-failed-to-load-because-no-supported-source-was-found
+
+            // ----- Above method won't work anymore -----
+            
+            fetch("http://localhost/example.mp4")
+                .then(x => x.blob())
+                .then(y => {
+                    let url = window.URL.createObjectURL(y);
+                    video.src = url;
+                    video.load();
+                    video.play()
+                        .then(() => {
+                            console.log("is ok, is playing")
+                        })
+                        .catch(error => {
+                            console.dir(error);
+                        });
+                });
+
+            // https://stackoverflow.com/questions/60072027/html5-video-source-as-locally-stored-blob-not-working-anymore
+            // https://forum.webostv.developer.lge.com/t/video-player-not-play-with-blob-as-source/694
+        </script>
+    </body>
+</html>
